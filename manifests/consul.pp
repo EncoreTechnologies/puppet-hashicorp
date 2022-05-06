@@ -20,15 +20,11 @@ class hashicorp::consul (
   $service            = undef,
   $service_ensure     = undef,
   $service_enable     = undef,
-  $manage_repo        = true,
 ) {
-  class { 'hashicorp':
-    manage_repo => $manage_repo,
-  }
+  include ::hashicorp
 
   hashicorp::download { 'consul':
-    version     => $version,
-    manage_repo => $manage_repo,
+    version    => $version,
   }
 
   File {

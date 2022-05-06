@@ -43,16 +43,12 @@ class hashicorp::consul_template (
   $service                  = undef,
   $service_ensure           = undef,
   $service_enable           = undef,
-  $manage_repo              = true,
 ) {
-  class { 'hashicorp':
-    manage_repo => $manage_repo,
-  }
+  include ::hashicorp
   $install_dir = $::hashicorp::install_dir
 
   hashicorp::download { 'consul-template':
-    version     => $version,
-    manage_repo => $manage_repo,
+    version    => $version,
   }
 
   File {

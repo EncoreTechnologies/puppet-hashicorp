@@ -2,10 +2,9 @@
 class hashicorp (
   $install_dir        = undef,
   $download_cache_dir = undef,
-  $manage_repo        = true,
 ) {
   include '::hashicorp::defaults'
-  if $manage_repo == true {
+  if ! defined(Package['gnupg']) {
     include '::gnupg'
   }
 
