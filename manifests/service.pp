@@ -5,8 +5,11 @@ define hashicorp::service (
   $provider,
   $command     = false,
   $args        = undef,
+  $manage_repo = true,
 ) {
-  include ::hashicorp
+  class { 'hashicorp':
+    manage_repo => $manage_repo,
+  }
 
   if $::hashicorp::defaults::service_type {
     create_resources("::hashicorp::service::${::hashicorp::defaults::service_type}", {

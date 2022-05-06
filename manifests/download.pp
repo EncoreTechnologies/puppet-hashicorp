@@ -1,8 +1,11 @@
 # ex: syntax=puppet si sw=2 ts=2 et
 define hashicorp::download (
   $version,
+  $manage_repo = true,
 ) {
-  include '::hashicorp'
+  class { 'hashicorp':
+    manage_repo => $manage_repo,
+  }
   $install_dir = $::hashicorp::install_dir
   $cache_dir = $::hashicorp::download_cache_dir
 
